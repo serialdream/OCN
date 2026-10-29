@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OCN Study Plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F7F0E8;
+    --card: #FFFFFF;
+    --blush: #DFF7C2;
+    --lavender: #E7A9C4;
+    --sage: #8DBF7B;
+    --plum: #33402E;
+    --plum-soft: #6F7A66;
+    --coral: #B0FF47;
+    --coral-deep: #6B9A34;
+    --line: #ECE4D6;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--cream);
+    color: var(--plum);
+    font-family: 'Nunito', sans-serif;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .wrap {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 24px 18px 60px;
+  }
+  header {
+    padding: 6px 4px 20px;
+  }
+  header h1 {
+    font-family: 'Baloo 2', sans-serif;
+    font-size: 1.7rem;
+    margin: 0 0 4px;
+    color: var(--plum);
+  }
+  header p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--plum-soft);
+  }
+
+.hero {
+background: linear-gradient(135deg, var(–blush), var(–lavender));
+border-radius: 22px;
+padding: 20px 20px 18px;
+margin-bottom: 20px;
+position: relative;
+overflow: hidden;
+}
+.hero-top {
+display: flex;
+justify-content: space-between;
+align-items: flex-end;
+gap: 12px;
+}
+.hero-days {
+font-family: ‘Baloo 2’, sans-serif;
+font-size: 2.6rem;
+line-height: 1;
+color: var(–plum);
+}
+.hero-days-label {
+font-size: 0.78rem;
+color: var(–plum-soft);
+font-weight: 700;
+margin-top: 4px;
+}
+.hero-target {
+text-align: right;
+font-size: 0.78rem;
+color: var(–plum-soft);
+font-weight: 700;
+line-height: 1.3;
+}
+.hero-target span {
+display: block;
+font-family: ‘Baloo 2’, sans-serif;
+font-size: 1.05rem;
+color: var(–coral-deep);
+}
+.progress-track {
+margin-top: 16px;
+background: rgba(255,255,255,0.55);
+border-radius: 999px;
+height: 10px;
+overflow: hidden;
+}
+.progress-fill {
+height: 100%;
+background: var(–coral);
+border-radius: 999px;
+transition: width 0.4s ease;
+}
+.progress-caption {
+margin-top: 8px;
+font-size: 0.78rem;
+color: var(–plum-soft);
+font-weight: 600;
+}
+
+.phase {
+margin-bottom: 14px;
+border-radius: 18px;
+background: var(–card);
+border: 1px solid var(–line);
+overflow: hidden;
+}
+.phase-head {
+width: 100%;
+display: flex;
+align-items: center;
+gap: 12px;
+padding: 15px 16px;
+background: none;
+border: none;
+cursor: pointer;
+text-align: left;
+font-family: ‘Nunito’, sans-serif;
+}
+.phase-dot {
+width: 34px;
+height: 34px;
+min-width: 34px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+font-family: ‘Baloo 2’, sans-serif;
+font-size: 0.85rem;
+color: var(–plum);
+font-weight: 700;
+}
+.phase-info { flex: 1; }
+.phase-info .name {
+font-weight: 800;
+font-size: 0.96rem;
+color: var(–plum);
+}
+.phase-info .dates {
+font-size: 0.76rem;
+color: var(–plum-soft);
+font-weight: 600;
+margin-top: 1px;
+}
+.phase-pct {
+font-size: 0.8rem;
+font-weight: 800;
+color: var(–coral-deep);
+min-width: 34px;
+text-align: right;
+}
+.chev {
+color: var(–plum-soft);
+transition: transform 0.25s ease;
+font-size: 0.75rem;
+}
+.phase.open .chev { transform: rotate(180deg); }
+
+.phase-body {
+max-height: 0;
+overflow: hidden;
+transition: max-height 0.3s ease;
+padding: 0 16px;
+}
+.phase.open .phase-body {
+padding: 0 16px 14px;
+}
+.weight-tag {
+display: inline-block;
+font-size: 0.72rem;
+font-weight: 800;
+color: var(–plum);
+background: var(–sage);
+padding: 3px 10px;
+border-radius: 999px;
+margin-bottom: 10px;
+}
+.note {
+font-size: 0.82rem;
+color: var(–plum-soft);
+margin: 0 0 10px;
+line-height: 1.4;
+}
+ul.tasks {
+list-style: none;
+margin: 0;
+padding: 0;
+}
+ul.tasks li {
+display: flex;
+align-items: flex-start;
+gap: 10px;
+padding: 8px 0;
+border-top: 1px solid var(–line);
+}
+ul.tasks li:first-child { border-top: none; }
+ul.tasks input[type=“checkbox”] {
+width: 20px;
+height: 20px;
+min-width: 20px;
+margin-top: 1px;
+accent-color: var(–coral);
+}
+ul.tasks label {
+font-size: 0.88rem;
+line-height: 1.4;
+color: var(–plum);
+}
+ul.tasks li.done label {
+color: var(–plum-soft);
+text-decoration: line-through;
+text-decoration-color: var(–coral);
+}
+
+.reset-row {
+text-align: center;
+margin-top: 22px;
+}
+.reset-btn {
+background: none;
+border: none;
+color: var(–plum-soft);
+font-family: ‘Nunito’, sans-serif;
+font-size: 0.78rem;
+font-weight: 700;
+text-decoration: underline;
+cursor: pointer;
+}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>OCN Study Plan</h1>
+    <p>Mometrix + practice exams, mapped to the 2025 ONCC test outline</p>
+  </header>
+
+  <div class="hero">
+    <div class="hero-top">
+      <div>
+        <div class="hero-days" id="pctBig">0%</div>
+        <div class="hero-days-label">of the plan complete</div>
+      </div>
+      <div class="hero-target">
+        Study plan<span>About 3 months</span>
+      </div>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="overallFill" style="width:0%"></div></div>
+    <div class="progress-caption" id="overallCaption">0 of 0 tasks done</div>
+    <div class="progress-caption" id="syncStatus" style="opacity:0.75; margin-top:2px;"></div>
+  </div>
+
+  <div id="phases"></div>
+
+  <div class="reset-row">
+    <button class="reset-btn" id="resetBtn">Clear all checkmarks</button>
+  </div>
+</div>
+
+<script>
+
+const phases = [
+  {
+    id: 'w1',
+    dot: 'W1',
+    color: 'var(--blush)',
+    name: 'Care Continuum',
+    dates: 'Week 1',
+    weight: '14% of exam',
+    note: 'Mometrix chapter + practice questions for this domain.',
+    tasks: [
+      'Health promotion, disease prevention, risk-reducing behaviors',
+      'Screening and early detection',
+      'Navigation and coordination of care',
+      'Palliative care considerations',
+      'Advance care planning (directives, goals of care)',
+      'Epidemiology — modifiable vs non-modifiable risk factors',
+      'Survivorship: rehab, recurrence, family/social, sexuality, discrimination, delayed effects',
+      'End-of-life care: bereavement, hospice, caregiver support, comfort measures',
+      'OCN practice quiz — Care Continuum'
+    ]
+  },
+  {
+    id: 'w2',
+    dot: 'W2',
+    color: 'var(--lavender)',
+    name: 'Oncology Nursing Practice',
+    dates: 'Week 2',
+    weight: '15% of exam',
+    note: 'Mometrix chapter + practice questions for this domain.',
+    tasks: [
+      'Scientific basis: carcinogenesis, immunology',
+      'Clinical trials and research protocols',
+      'Genomic testing (NGS) vs genetic testing',
+      'Site-specific cancer: pathophysiology, diagnostics, mets, staging/grading, performance status',
+      'Scope & standards: accreditation, collaboration, culturally congruent care',
+      'Occupational health & safety (PPE, safe handling)',
+      'Patient advocacy, ethics, self-care (compassion fatigue, burnout)',
+      'OCN practice quiz — Nursing Practice'
+    ]
+  },
+  {
+    id: 'w34',
+    dot: 'W3-4',
+    color: 'var(--sage)',
+    name: 'Treatment Modalities',
+    dates: 'Weeks 3–4',
+    weight: '20% of exam — 2 weeks',
+    note: 'Biggest content block so far — split across two weeks. Mometrix chapters + as many practice questions as you can find.',
+    tasks: [
+      'Surgical and procedural interventions',
+      'Blood and marrow transplant',
+      'Radiation therapy',
+      'Systemic therapy: chemo, biotherapy, immunotherapy, hormonal',
+      'Localized therapy (intrathecal, intravesical)',
+      'Targeted therapies (immune cell, bispecific antibodies)',
+      'Oral therapies',
+      'OCN practice quiz — Treatment Modalities',
+      'Flag any drug classes/regimens to revisit with unit educator'
+    ]
+  },
+  {
+    id: 'w56',
+    dot: 'W5-6',
+    color: 'var(--blush)',
+    name: 'Symptom Management & Supportive Care',
+    dates: 'Weeks 5–6',
+    weight: '25% of exam — largest domain, 2 weeks',
+    note: 'Highest-weighted section. Extra practice-question volume here pays off most.',
+    tasks: [
+      'Anatomical/surgical alterations (lymphedema, ostomy, radiation site effects)',
+      'Vascular access devices (VADs)',
+      'Pharmacologic interventions',
+      'Complementary/integrative modalities (massage, acupuncture, herbal supplements)',
+      'System alterations: hematologic, immunologic, GI, GU',
+      'System alterations: integumentary, respiratory, cardiovascular',
+      'System alterations: neurological, musculoskeletal',
+      'Nutrition',
+      'Pain management',
+      'OCN practice quiz — Symptom Management (do twice)'
+    ]
+  },
+  {
+    id: 'w7',
+    dot: 'W7',
+    color: 'var(--lavender)',
+    name: 'Oncologic Emergencies',
+    dates: 'Week 7',
+    weight: '16% of exam',
+    note: 'Long list, but pattern-based — drill recognition + first response for each rather than deep pathophys.',
+    tasks: [
+      'DIC and TLS — triggers, labs, first response',
+      'SIADH, hypercalcemia — recognition and management',
+      'Sepsis, anaphylaxis, hypersensitivity reactions',
+      'Cardiac tamponade, SVC syndrome',
+      'Spinal cord compression, increased ICP',
+      'Obstructions, pneumonitis, extravasation',
+      'Immune-related AEs: CRS, ICANS',
+      'Venous thromboembolism',
+      'OCN practice quiz — Oncologic Emergencies'
+    ]
+  },
+  {
+    id: 'pre',
+    dot: '★',
+    color: 'var(--sage)',
+    name: 'Psychosocial Dimensions',
+    dates: 'Last 2 days before the course',
+    weight: '10% of exam — quick pre-course pass',
+    note: 'Lighter domain, good as a refresher right before the course days.',
+    tasks: [
+      'Cultural, spiritual, and religious diversity in care',
+      'Altered body image, learning preferences/barriers',
+      'Social/family dynamics, coping mechanisms, support systems',
+      'Psychosocial distress: anxiety, grief, loss of autonomy, caregiver fatigue, crisis management',
+      'Sexuality: reproductive issues, sexual dysfunction, intimacy, LGBTQ+ considerations',
+      'Financial concerns: employment, insurance, resources'
+    ]
+  },
+  {
+    id: 'course',
+    dot: '👥',
+    color: 'var(--blush)',
+    name: 'Work Course Days',
+    dates: 'Course days',
+    weight: 'With your unit educator',
+    note: 'Use these to fill gaps from the first pass, not first exposure. Trade teach-backs with your educator on tricky content.',
+    tasks: [
+      'Bring a list of weak spots from Weeks 1–7',
+      'Prioritize Treatment Modalities, Symptom Management, Emergencies (60%+ of exam)',
+      'Teach-back session with educator on tricky pharm / emergencies',
+      'Note any content the course covers that your books didn\'t emphasize'
+    ]
+  },
+  {
+    id: 'drill',
+    dot: '✎',
+    color: 'var(--lavender)',
+    name: 'Practice & Drill',
+    dates: 'About 4–5 weeks after the course',
+    weight: 'Shift to 60–70% practice questions',
+    note: 'Full timed sets using whatever OCN practice exams you\'ve sourced. Track scores by domain, not just overall %.',
+    tasks: [
+      'First full timed practice exam (165Q / 3 hrs) — establish baseline',
+      'Log scores by domain to spot weak areas',
+      'Targeted review of lowest-scoring domain(s)',
+      'Second full timed practice exam',
+      'Second work study session: full timed practice exam + debrief with educator',
+      'Third full timed practice exam, aim for consistency across domains'
+    ]
+  },
+  {
+    id: 'taper',
+    dot: '✓',
+    color: 'var(--sage)',
+    name: 'Taper',
+    dates: 'Final 2 weeks before the exam',
+    weight: 'Light review only',
+    note: 'No new content — skim weak-domain notes, small quizzes, protect your sleep and confidence.',
+    tasks: [
+      'Confirm ATT and lock in PSI test date/location',
+      'Skim weak-domain notes only — no new material',
+      'Small daily quizzes (15–20Q), not full timed exams',
+      'Review exam-day logistics (ID, arrival time, what\'s allowed)',
+      'Rest day the day before the exam'
+    ]
+  }
+];
+
+const STORAGE_KEY = 'ocn-study-plan-progress';
+
+// ---- Cloud sync setup (JSONBin.io — free account) ----
+// 1. Create a free account at https://jsonbin.io
+// 2. Create a new bin with content: {}
+// 3. Copy the Bin ID (from the URL after creating it) and your X-Master-Key
+//    (Account → API Keys) into the two constants below.
+// This is what lets progress survive deleting the home-screen icon —
+// it's stored in the cloud, not just on this device.
+const JSONBIN_BIN_ID = 'YOUR_BIN_ID_HERE';
+const JSONBIN_API_KEY = 'YOUR_MASTER_KEY_HERE';
+const CLOUD_ENABLED = JSONBIN_BIN_ID !== 'YOUR_BIN_ID_HERE' && JSONBIN_API_KEY !== 'YOUR_MASTER_KEY_HERE';
+const JSONBIN_URL = 'https://api.jsonbin.io/v3/b/' + JSONBIN_BIN_ID;
+
+let state = {};
+function taskId(phaseId, idx) { return phaseId + '-' + idx; }
+let syncTimer = null;
+const SYNC_STATUS_EL_ID = 'syncStatus';
+
+function setSyncStatus(text) {
+  const el = document.getElementById(SYNC_STATUS_EL_ID);
+  if (el) el.textContent = text;
+}
+
+async function loadState() {
+  // Fast local cache first, so the page isn't blank while the cloud loads
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) state = JSON.parse(raw);
+  } catch (e) {
+    state = {};
+  }
+
+  if (!CLOUD_ENABLED) {
+    setSyncStatus('Saving on this device only — add JSONBin keys for cloud sync');
+    return;
+  }
+
+  try {
+    setSyncStatus('Syncing…');
+    const res = await fetch(JSONBIN_URL + '/latest', {
+      headers: { 'X-Master-Key': JSONBIN_API_KEY }
+    });
+    if (!res.ok) throw new Error('fetch failed');
+    const data = await res.json();
+    if (data && data.record && typeof data.record === 'object') {
+      state = data.record;
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+    setSyncStatus('Synced ✓');
+  } catch (e) {
+    console.error('Cloud load failed, using local copy', e);
+    setSyncStatus('Offline — using last saved copy');
+  }
+}
+
+async function saveState() {
+  // Always save locally immediately
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch (e) {
+    console.error('Could not save locally', e);
+  }
+
+  if (!CLOUD_ENABLED) return;
+
+  // Debounce cloud writes so rapid taps don't fire a request each time
+  clearTimeout(syncTimer);
+  setSyncStatus('Saving…');
+  syncTimer = setTimeout(async () => {
+    try {
+      const res = await fetch(JSONBIN_URL, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Master-Key': JSONBIN_API_KEY
+        },
+        body: JSON.stringify(state)
+      });
+      if (!res.ok) throw new Error('save failed');
+      setSyncStatus('Synced ✓');
+    } catch (e) {
+      console.error('Cloud save failed', e);
+      setSyncStatus('Saved on this device — will retry sync');
+    }
+  }, 600);
+}
+
+function updateOverallProgress() {
+  let total = 0, done = 0;
+  phases.forEach(p => {
+    p.tasks.forEach((t, i) => {
+      total++;
+      if (state[taskId(p.id, i)]) done++;
+    });
+  });
+  const pct = total ? Math.round((done / total) * 100) : 0;
+  document.getElementById('overallFill').style.width = pct + '%';
+  document.getElementById('pctBig').textContent = pct + '%';
+  document.getElementById('overallCaption').textContent = done + ' of ' + total + ' tasks done';
+}
+
+function updatePhasePct(phase) {
+  const el = document.querySelector('[data-pct="' + phase.id + '"]');
+  if (!el) return;
+  const total = phase.tasks.length;
+  let done = 0;
+  phase.tasks.forEach((t, i) => { if (state[taskId(phase.id, i)]) done++; });
+  const pct = total ? Math.round((done / total) * 100) : 0;
+  el.textContent = pct + '%';
+}
+
+function render() {
+  const container = document.getElementById('phases');
+  container.innerHTML = '';
+  phases.forEach(phase => {
+    const div = document.createElement('div');
+    div.className = 'phase';
+    div.id = 'phase-' + phase.id;
+
+    const tasksHtml = phase.tasks.map((t, i) => {
+      const id = taskId(phase.id, i);
+      const checked = state[id] ? 'checked' : '';
+      const doneClass = state[id] ? 'done' : '';
+      return '<li class="' + doneClass + '" data-task="' + id + '">' +
+        '<input type="checkbox" id="chk-' + id + '" ' + checked + '>' +
+        '<label for="chk-' + id + '">' + t + '</label></li>';
+    }).join('');
+
+    div.innerHTML =
+      '<button class="phase-head" data-toggle="' + phase.id + '">' +
+        '<div class="phase-dot" style="background:' + phase.color + '">' + phase.dot + '</div>' +
+        '<div class="phase-info">' +
+          '<div class="name">' + phase.name + '</div>' +
+          '<div class="dates">' + phase.dates + '</div>' +
+        '</div>' +
+        '<div class="phase-pct" data-pct="' + phase.id + '">0%</div>' +
+        '<div class="chev">▾</div>' +
+      '</button>' +
+      '<div class="phase-body">' +
+        '<span class="weight-tag">' + phase.weight + '</span>' +
+        '<p class="note">' + phase.note + '</p>' +
+        '<ul class="tasks">' + tasksHtml + '</ul>' +
+      '</div>';
+
+    container.appendChild(div);
+    updatePhasePct(phase);
+  });
+
+  document.querySelectorAll('.phase-head').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const parent = btn.closest('.phase');
+      const body = parent.querySelector('.phase-body');
+      const isOpen = parent.classList.contains('open');
+      document.querySelectorAll('.phase.open').forEach(p => {
+        if (p !== parent) {
+          p.classList.remove('open');
+          p.querySelector('.phase-body').style.maxHeight = null;
+        }
+      });
+      if (isOpen) {
+        parent.classList.remove('open');
+        body.style.maxHeight = null;
+      } else {
+        parent.classList.add('open');
+        body.style.maxHeight = body.scrollHeight + 'px';
+      }
+    });
+  });
+
+  document.querySelectorAll('ul.tasks input[type="checkbox"]').forEach(cb => {
+    cb.addEventListener('change', async (e) => {
+      const li = e.target.closest('li');
+      const id = li.getAttribute('data-task');
+      state[id] = e.target.checked;
+      li.classList.toggle('done', e.target.checked);
+      const phaseId = id.split('-').slice(0, -1).join('-');
+      const phase = phases.find(p => p.id === phaseId);
+      if (phase) updatePhasePct(phase);
+      updateOverallProgress();
+      await saveState();
+      const parent = e.target.closest('.phase');
+      if (parent.classList.contains('open')) {
+        const body = parent.querySelector('.phase-body');
+        body.style.maxHeight = body.scrollHeight + 'px';
+      }
+    });
+  });
+}
+
+document.getElementById('resetBtn').addEventListener('click', async () => {
+  if (!confirm('Clear all checkmarks? This can\'t be undone.')) return;
+  state = {};
+  await saveState();
+  render();
+  updateOverallProgress();
+});
+
+(async function init() {
+  await loadState();
+  render();
+  updateOverallProgress();
+})();
+</script>
+
+</body>
+</html>
